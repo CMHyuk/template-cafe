@@ -1,0 +1,7 @@
+package com.idol.cafe.repository;
+
+import com.idol.cafe.domain.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+}
