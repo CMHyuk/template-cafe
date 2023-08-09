@@ -13,7 +13,7 @@ import static lombok.AccessLevel.PROTECTED;
 public class BusinessLicense {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "business_licnese_id")
+    @Column(name = "business_license_id")
     private Long id;
 
     private String registrationNumber;

@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
@@ -22,9 +26,13 @@ public class Cafe {
     private Boolean isReservable;
     private String cafeName;
     private String introduction;
+    private String imageUrl;
 
     @Embedded
     private Address address;
+
+    @OneToMany(mappedBy = "cafe", cascade = ALL)
+    private List<Reservation> reservations = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
