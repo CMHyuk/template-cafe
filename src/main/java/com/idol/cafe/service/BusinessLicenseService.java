@@ -23,14 +23,14 @@ public class BusinessLicenseService {
     private final S3Config s3Config;
     private final AmazonS3Client amazonS3;
 
-    public String uploadBusinessLicense(MultipartFile multipartFile) throws IOException {
-        String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
+    public void uploadBusinessLicense(MultipartFile file) throws IOException {
+        String s3FileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
 
         ObjectMetadata objMeta = new ObjectMetadata();
-        objMeta.setContentLength(multipartFile.getInputStream().available());
-        amazonS3.putObject(s3Config.getBucket(), s3FileName, multipartFile.getInputStream(), objMeta);
+        objMeta.setContentLength(file.getInputStream().available());
+        amazonS3.putObject(s3Config.getBucket(), s3FileName, file.getInputStream(), objMeta);
 
-        return amazonS3.getUrl(s3Config.getBucket(), s3FileName).toString();
+        amazonS3.getUrl(s3Config.getBucket(), s3FileName).toString();
     }
 
     public void saveRegisterNumber(BusinessLicenseResponse businessLicenseResponse) {

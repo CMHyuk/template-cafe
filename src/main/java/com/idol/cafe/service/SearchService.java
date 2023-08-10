@@ -16,9 +16,9 @@ public class SearchService {
 
     private final CafeRepositoryImpl cafeRepository;
 
-    public List<Cafe> search(SearchRequest request) {
+    public List<Cafe> searchCafe(SearchRequest request) {
         //1. 아이돌만 검색 2. 아이돌 + 날짜 3. 아이돌 + 장소 4. 아이돌 + 날짜 + 장소
-        return cafeRepository.getResults(request);
+        return cafeRepository.getCafeResults(request);
     }
 
 }

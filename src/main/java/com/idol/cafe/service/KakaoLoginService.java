@@ -16,7 +16,7 @@ public class KakaoLoginService {
 
     private final WebClientConfig webClientConfig;
 
-    public GetMemberInfoResponse getMemberInfo(String accessToken) {
+    public GetMemberInfoResponse getKakaoMemberInfo(String accessToken) {
         return webClientConfig.kakao().get()
                 .uri("/v2/user/me")
                 .header("Authorization", "Bearer " + accessToken)

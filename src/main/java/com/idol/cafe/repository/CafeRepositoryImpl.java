@@ -17,7 +17,7 @@ public class CafeRepositoryImpl implements CafeRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Cafe> getResults(SearchRequest request) {
+    public List<Cafe> getCafeResults(SearchRequest request) {
         QCafe cafe = QCafe.cafe;
         QUser user = QUser.user;
         QReservation reservation = QReservation.reservation;
