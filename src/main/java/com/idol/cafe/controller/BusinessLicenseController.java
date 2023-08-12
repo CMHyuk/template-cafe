@@ -22,7 +22,7 @@ public class BusinessLicenseController {
     private final NationalTaxService nationalTaxService;
     private final OcrService ocrService;
 
-    @PostMapping("/save/businessLicense")
+    @PostMapping("/businessLicense/save")
     public void get(@RequestParam("file") MultipartFile file) throws IOException {
         businessLicenseService.uploadBusinessLicense(file);
         byte[] imageBytes = file.getBytes();
@@ -30,7 +30,7 @@ public class BusinessLicenseController {
         businessLicenseService.saveRegisterNumber(businessLicenseInfo);
     }
 
-    @GetMapping("/status")
+    @GetMapping("/businessLicense/status")
     public BusinessLicenseStatus confirmBusinessLicenseStatus(@RequestParam String registerNumber) {
         return nationalTaxService.confirmBusinessLicenseStatus(registerNumber);
     }
