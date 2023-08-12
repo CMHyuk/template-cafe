@@ -4,7 +4,7 @@ import com.idol.cafe.domain.entity.Cafe;
 import com.idol.cafe.domain.entity.QCafe;
 import com.idol.cafe.domain.entity.QReservation;
 import com.idol.cafe.domain.entity.QUser;
-import com.idol.cafe.dto.request.SearchRequest;
+import com.idol.cafe.dto.request.CafeSearchRequest;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class CafeRepositoryImpl implements CafeRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Cafe> getCafeResults(SearchRequest request) {
+    public List<Cafe> getCafeResults(CafeSearchRequest request) {
         QCafe cafe = QCafe.cafe;
         QUser user = QUser.user;
         QReservation reservation = QReservation.reservation;
@@ -49,6 +49,7 @@ public class CafeRepositoryImpl implements CafeRepositoryCustom {
                 .leftJoin(cafe.user, user)
                 .leftJoin(cafe.reservations, reservation)
                 .where(predicate)
+                .limit(10)
                 .fetch();
     }
 
