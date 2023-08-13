@@ -1,7 +1,10 @@
 package com.idol.cafe.service;
 
+import com.idol.cafe.domain.RoleType;
 import com.idol.cafe.domain.entity.User;
+import com.idol.cafe.dto.request.LoginUser;
 import com.idol.cafe.dto.response.kakao.GetMemberInfoResponse;
+import com.idol.cafe.exception.UserNotFound;
 import com.idol.cafe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,12 @@ public class UserService {
                 .email(userInfo.getKakaoAccount().getEmail())
                 .build();
         return saveUser(user);
+    }
+
+    public void updateRoleType(LoginUser loginUser, String roleType) {
+        User user = userRepository.findById(loginUser.getId())
+                .orElseThrow(UserNotFound::new);
+        user.updateRoleType(roleType);
     }
 
     private Long saveUser(User user) {

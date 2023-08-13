@@ -14,19 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class KakaoLoginController {
 
-    private final KakaoLoginService kakaoLoginService;
-    private final JwtService jwtService;
-    private final UserService userService;
 
-    @PostMapping("/token")
-    public JwtResponse kakaoLogin(@RequestParam String accessToken) {
-        GetMemberInfoResponse userInfo = kakaoLoginService.getKakaoMemberInfo(accessToken);
-        Long userId = userService.saveFromKakao(userInfo);
-
-        String generateAccessToken = jwtService.generateAccessToken(userId);
-        String generateRefreshToken = jwtService.generateRefreshToken(userId);
-
-        return new JwtResponse(generateAccessToken, generateRefreshToken);
-    }
 
 }

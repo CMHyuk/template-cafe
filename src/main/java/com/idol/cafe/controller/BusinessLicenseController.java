@@ -1,12 +1,9 @@
 package com.idol.cafe.controller;
 
 import com.idol.cafe.dto.response.businesslicense.BusinessLicenseResponse;
-import com.idol.cafe.dto.response.businesslicense.BusinessLicenseStatus;
 import com.idol.cafe.service.BusinessLicenseService;
-import com.idol.cafe.service.NationalTaxService;
 import com.idol.cafe.service.OcrService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,20 +16,13 @@ import java.io.IOException;
 public class BusinessLicenseController {
 
     private final BusinessLicenseService businessLicenseService;
-    private final NationalTaxService nationalTaxService;
     private final OcrService ocrService;
 
     @PostMapping("/businessLicense/save")
     public void get(@RequestParam("file") MultipartFile file) throws IOException {
         businessLicenseService.uploadBusinessLicense(file);
-        byte[] imageBytes = file.getBytes();
-        BusinessLicenseResponse businessLicenseInfo = ocrService.getBusinessLicenseInfo(imageBytes, "사업자 등록증");
-        businessLicenseService.saveRegisterNumber(businessLicenseInfo);
-    }
-
-    @GetMapping("/businessLicense/status")
-    public BusinessLicenseStatus confirmBusinessLicenseStatus(@RequestParam String registerNumber) {
-        return nationalTaxService.confirmBusinessLicenseStatus(registerNumber);
+        BusinessLicenseResponse businessLicenseInfo = ocrService.getBusinessLicenseInfo(file, "사업자 등록증");
+        businessLicenseService.saveRegistrationNumber(businessLicenseInfo);
     }
 
 }

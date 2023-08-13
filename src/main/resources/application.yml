@@ -37,5 +37,8 @@ cloud:
 jwt:
   jwt-key: "LMRLvJVDp/lUVRG6EcJTo7g6moHepHps9lRFw9KIiA4="
 
+invoke-url:
+  url: "https://ng9uv3ttrl.apigw.ntruss.com/custom/v1/24289/3e818bfd9c5ba0c0cbb341e28a7636c91bd0b012a236a510c6e149e62fa95621/document/biz-license"
+
 service-key:
-  service-key: "avuD+jmTxg/pn4CWUsCpjHe5C5qITGrrqYX89SC1wdBKDa+8/bMVe3n5EM8kgzPCVH0fFiXmEsaHLGAbymLRBw=="
+  key: "api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=avuD%2BjmTxg%2Fpn4CWUsCpjHe5C5qITGrrqYX89SC1wdBKDa%2B8%2FbMVe3n5EM8kgzPCVH0fFiXmEsaHLGAbymLRBw%3D%3D"

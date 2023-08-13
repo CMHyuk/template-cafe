@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Cafes</title>
+</head>
+<body>
+<h1>Admin Cafes</h1>
+
+<div th:fragment="cafeTable(cafes)">
+    <table>
+        <thead>
+        <tr>
+            <th>Cafe Name</th>
+            <th>Introduction</th>
+            <th>Image URL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cafe : ${cafes}">
+            <td th:text="${cafe.cafeName}"></td>
+            <td th:text="${cafe.introduction}"></td>
+            <td th:text="${cafe.imageUrl}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="pagination(page)">
+    <div th:if="${page.totalPages > 1}">
+        <ul class="pagination">
+            <li th:classappend="${page.number == 0} ? disabled">
+                <a th:href="${page.first ? '#' : '/admin/cafes?page=' + (page.number - 1)}">&laquo;</a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:classappend="${page.number == i} ? active">
+                <a th:href="'/admin/cafes?page=' + i" th:text="${i + 1}"></a>
+            </li>
+            <li th:classappend="${page.number == page.getNumber()} ? disabled">
+                <a th:href="${page.hasNext() ? '/admin/cafes?page=' + (page.getNumber() + 1) : '#'}">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:replace="~{::cafeTable(cafes)}"></div>
+<div th:replace="~{::pagination(cafes.page)}"></div>
+
+</body>
+</html>

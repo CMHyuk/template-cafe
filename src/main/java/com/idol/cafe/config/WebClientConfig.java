@@ -1,6 +1,7 @@
 package com.idol.cafe.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,9 +17,11 @@ import static org.springframework.web.util.DefaultUriBuilderFactory.EncodingMode
 @RequiredArgsConstructor
 public class WebClientConfig {
 
-    private static final String OCR_URL = "https://ng9uv3ttrl.apigw.ntruss.com/custom/v1/24289/3e818bfd9c5ba0c0cbb341e28a7636c91bd0b012a236a510c6e149e62fa95621/document/biz-license";
-    public static final String NATIONAL_TAX_SERVICE_URL = "api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=avuD%2BjmTxg%2Fpn4CWUsCpjHe5C5qITGrrqYX89SC1wdBKDa%2B8%2FbMVe3n5EM8kgzPCVH0fFiXmEsaHLGAbymLRBw%3D%3D";
+    @Value("${invoke-url.url}")
+    private String invokeUrl;
 
+    @Value("${service-key.key}")
+    private String serviceKeyUrl;
 
     @Bean
     public WebClient kakao() {
@@ -31,13 +34,13 @@ public class WebClientConfig {
     @Bean
     public WebClient ocr() {
         return WebClient.builder()
-                .baseUrl(OCR_URL)
+                .baseUrl(invokeUrl)
                 .build();
     }
 
     @Bean
     public WebClient confirmRegisterNumber() {
-        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(NATIONAL_TAX_SERVICE_URL);
+        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(serviceKeyUrl);
         factory.setEncodingMode(VALUES_ONLY);
 
         return WebClient.builder()

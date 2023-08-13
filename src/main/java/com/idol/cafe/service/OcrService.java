@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
@@ -19,7 +21,7 @@ public class OcrService {
 
     private final WebClientConfig webClientConfig;
 
-    public BusinessLicenseResponse getBusinessLicenseInfo(byte[] imageData, String imageName) {
+    public BusinessLicenseResponse getBusinessLicenseInfo(MultipartFile file, String imageName) throws IOException {
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("version", "V2");
         requestBody.put("requestId", UUID.randomUUID().toString());
@@ -28,7 +30,7 @@ public class OcrService {
         List<Map<String, String>> images = new ArrayList<>();
         Map<String, String> imageInfo = new HashMap<>();
         imageInfo.put("format", "jpg");
-        imageInfo.put("data", Base64.getEncoder().encodeToString(imageData));
+        imageInfo.put("data", Base64.getEncoder().encodeToString(file.getBytes()));
         imageInfo.put("name", imageName);
         images.add(imageInfo);
 

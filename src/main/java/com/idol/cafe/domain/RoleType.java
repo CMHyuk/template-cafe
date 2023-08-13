@@ -5,12 +5,18 @@ import lombok.Getter;
 @Getter
 public enum RoleType {
 
-    NORMAL("normal") ,CAFE_OWNER("cafeOwner"), ADMIN("admin");
+    NORMAL("normal"), CAFE_OWNER("cafeOwner", false), ADMIN("admin");
 
     private String type;
+    private Boolean isRegisteredBusiness;
 
     RoleType(String type) {
         this.type = type;
+    }
+
+    RoleType(String type, boolean isRegisteredBusiness) {
+        this.type = type;
+        this.isRegisteredBusiness = isRegisteredBusiness;
     }
 
     public static RoleType fromString(String value) {
@@ -19,7 +25,7 @@ public enum RoleType {
                 return type;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("존재하지 않는 등급입니다.");
     }
 
 }

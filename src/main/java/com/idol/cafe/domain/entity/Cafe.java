@@ -23,7 +23,6 @@ public class Cafe {
     @Column(name = "cafe_id")
     private Long id;
 
-    private Boolean isReservable;
     private String cafeName;
     private String introduction;
     private String imageUrl;
@@ -39,10 +38,10 @@ public class Cafe {
     private User user;
 
     @Builder
-    public Cafe(Boolean isReservable, String cafeName, String introduction, Address address, User user) {
-        this.isReservable = isReservable;
+    public Cafe(String cafeName, String introduction, String imageUrl, Address address, User user) {
         this.cafeName = cafeName;
         this.introduction = introduction;
+        this.imageUrl = imageUrl;
         this.address = address;
         this.user = user;
     }

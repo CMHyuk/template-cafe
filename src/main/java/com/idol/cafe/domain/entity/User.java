@@ -28,10 +28,13 @@ public class User extends BaseEntity {
     private String email;
 
     @Builder
-    public User(RoleType roleType, String nickname, String email) {
-        this.roleType = roleType;
+    public User(String nickname, String email) {
         this.nickname = nickname;
         this.email = email;
+    }
+
+    public void updateRoleType(String roleType) {
+        this.roleType = RoleType.fromString(roleType);
     }
 
 }
