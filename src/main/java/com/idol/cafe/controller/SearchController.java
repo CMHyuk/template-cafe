@@ -19,14 +19,4 @@ public class SearchController {
 
     private final SearchService searchService;
 
-    @GetMapping("/cafes")
-    public List<CafeSearchResponse> searchCafe(@RequestBody @Valid CafeSearchRequest request) {
-        return searchService.searchCafe(request);
-    }
-
-    @GetMapping("/cafe/{cafeId}/details")
-    public CafeResponse getCafeDetails(@PathVariable Long cafeId) {
-        return searchService.getCafeDetails(cafeId);
-    }
-
 }

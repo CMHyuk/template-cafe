@@ -2,11 +2,15 @@ package com.idol.cafe.service;
 
 import com.idol.cafe.domain.entity.Cafe;
 import com.idol.cafe.domain.entity.User;
+import com.idol.cafe.dto.request.CafeSearchRequest;
 import com.idol.cafe.dto.request.LoginUser;
 import com.idol.cafe.dto.request.SaveCafeRequest;
 import com.idol.cafe.dto.response.CafeResponse;
+import com.idol.cafe.dto.response.CafeSearchResponse;
+import com.idol.cafe.exception.CafeNotFound;
 import com.idol.cafe.exception.UserNotFound;
 import com.idol.cafe.repository.CafeRepository;
+import com.idol.cafe.repository.CafeRepositoryImpl;
 import com.idol.cafe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,6 +28,7 @@ import static java.util.stream.Collectors.*;
 public class CafeService {
 
     private final UserRepository userRepository;
+    private final CafeRepositoryImpl cafeRepositoryImpl;
     private final CafeRepository cafeRepository;
 
     public Long saveCafe(LoginUser loginUser, SaveCafeRequest request) {
@@ -41,13 +46,22 @@ public class CafeService {
         return cafeRepository.save(cafe).getId();
     }
 
-    public List<CafeResponse> getCafes(Pageable pageable) {
-        Page<Cafe> cafes = cafeRepository.findAll(pageable);
-        return cafes.stream().map(c -> CafeResponse.builder()
-                        .cafeName(c.getCafeName())
-                        .introduction(c.getIntroduction())
-                        .imageUrl(c.getImageUrl())
-                        .build())
+    public List<CafeSearchResponse> searchCafe(CafeSearchRequest request) {
+        //1. 아이돌만 검색 2. 아이돌 + 날짜 3. 아이돌 + 장소 4. 아이돌 + 날짜 + 장소
+        List<Cafe> cafes = cafeRepositoryImpl.getCafeResults(request);
+        return cafes.stream().map(c -> new CafeSearchResponse(c.getCafeName(), c.getAddress()))
                 .collect(toList());
     }
+
+    public CafeResponse getCafeDetails(Long cafeId) {
+        Cafe cafe = cafeRepository.findById(cafeId)
+                .orElseThrow(CafeNotFound::new);
+
+        return CafeResponse.builder()
+                .cafeName(cafe.getCafeName())
+                .introduction(cafe.getIntroduction())
+                .imageUrl(cafe.getImageUrl())
+                .build();
+    }
+
 }

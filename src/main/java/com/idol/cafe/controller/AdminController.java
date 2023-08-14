@@ -1,6 +1,6 @@
 package com.idol.cafe.controller;
 
-import com.idol.cafe.service.CafeService;
+import com.idol.cafe.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -14,11 +14,12 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final CafeService cafeService;
+    private final AdminService adminService;
 
     @GetMapping("/admin/cafes")
     public String getCafes(@PageableDefault(sort = "id", direction = DESC) Pageable pageable, Model model) {
-        model.addAttribute("cafes", cafeService.getCafes(pageable));
+        model.addAttribute("cafes", adminService.getCafes(pageable));
         return "/admin/cafes";
     }
+
 }
