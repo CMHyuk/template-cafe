@@ -1,4 +1,4 @@
-package com.idol;
+package com.idol.cafe;
 
 import com.idol.cafe.domain.entity.User;
 import com.idol.cafe.repository.UserRepository;

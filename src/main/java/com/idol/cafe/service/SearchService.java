@@ -35,6 +35,7 @@ public class SearchService {
                 .orElseThrow(CafeNotFound::new);
 
         return CafeResponse.builder()
+                .cafeId(cafe.getId())
                 .cafeName(cafe.getCafeName())
                 .introduction(cafe.getIntroduction())
                 .imageUrl(cafe.getImageUrl())

@@ -1,6 +1,7 @@
 package com.idol.cafe.domain.entity;
 
 import com.idol.cafe.domain.Address;
+import com.idol.cafe.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-public class Cafe {
+public class Cafe extends BaseEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "cafe_id")

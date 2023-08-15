@@ -24,8 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginCheckInterceptor(jwtService))
                 .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/token");
+                .excludePathPatterns("/token", "/admin/**", "/css/**", "/*.ico", "/error");
     }
 
 }

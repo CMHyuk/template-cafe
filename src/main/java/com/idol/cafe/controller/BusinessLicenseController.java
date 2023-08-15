@@ -1,5 +1,7 @@
 package com.idol.cafe.controller;
 
+import com.idol.cafe.config.Login;
+import com.idol.cafe.dto.request.LoginUser;
 import com.idol.cafe.dto.response.businesslicense.BusinessLicenseResponse;
 import com.idol.cafe.service.BusinessLicenseService;
 import com.idol.cafe.service.OcrService;
@@ -19,10 +21,10 @@ public class BusinessLicenseController {
     private final OcrService ocrService;
 
     @PostMapping("/businessLicense/save")
-    public void get(@RequestParam("file") MultipartFile file) throws IOException {
+    public void get(@Login LoginUser loginUser, @RequestParam("file") MultipartFile file) throws IOException {
         businessLicenseService.uploadBusinessLicense(file);
         BusinessLicenseResponse businessLicenseInfo = ocrService.getBusinessLicenseInfo(file, "사업자 등록증");
-        businessLicenseService.saveRegistrationNumber(businessLicenseInfo);
+        businessLicenseService.saveRegistrationNumber(loginUser, businessLicenseInfo);
     }
 
 }

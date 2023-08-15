@@ -13,14 +13,12 @@ import com.idol.cafe.repository.CafeRepository;
 import com.idol.cafe.repository.CafeRepositoryImpl;
 import com.idol.cafe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +56,7 @@ public class CafeService {
                 .orElseThrow(CafeNotFound::new);
 
         return CafeResponse.builder()
+                .cafeId(cafe.getId())
                 .cafeName(cafe.getCafeName())
                 .introduction(cafe.getIntroduction())
                 .imageUrl(cafe.getImageUrl())
