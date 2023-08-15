@@ -1,6 +1,6 @@
 package com.idol.cafe.exception;
 
-public class UserNotFound extends Exception {
+public class UserNotFound extends BircaException {
 
     private static final String MESSAGE = "존재하지 않는 회원입니다.";
 

@@ -1,12 +1,12 @@
 package com.idol.cafe.exception.jwt;
 
-import com.idol.cafe.exception.Exception;
+import com.idol.cafe.exception.BircaException;
 
-public class RefreshTokenExpiredException extends Exception {
+public class RefreshTokenExpiredBircaException extends BircaException {
 
     private static final String MESSAGE = "RefreshToken이 만료되었습니다.";
 
-    public RefreshTokenExpiredException() {
+    public RefreshTokenExpiredBircaException() {
         super(MESSAGE);
     }
 

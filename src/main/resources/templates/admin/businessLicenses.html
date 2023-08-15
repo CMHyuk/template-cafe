@@ -10,17 +10,25 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>카페 이름</th>
                 <th>사용자</th>
+                <th>사업자등록번호</th>
                 <th>등록 일자</th>
+                <th>승인 여부</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="cafe : ${cafes}">
-                <td><a th:href="'/admin/cafe/'+${cafe.cafeId}" th:text="${cafe.cafeId}"></a></td>
-                <td th:text="${cafe.cafeName}"></td>
-                <td th:text="${cafe.nickname}"></td>
-                <td th:text="${#temporals.format(cafe.localDateTime, 'yyyy-MM-dd')}"></td>
+            <tr th:each="businessLicense : ${businessLicenses}">
+                <td th:text="${businessLicense.businessLicenseId}"></td>
+                <td th:text="${businessLicense.nickname}"></td>
+                <td th:text="${businessLicense.registrationNumber}"></td>
+                <td th:text="${#temporals.format(businessLicense.localDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td>
+                    <span th:if="${businessLicense.isRegisteredBusiness}">승인 완료</span>
+                    <form th:unless="${businessLicense.isRegisteredBusiness}" th:action="'/admin/businessLicense/' + ${businessLicense.businessLicenseId} + '/allow'" method="post">
+                        <button type="submit">승인</button>
+                    </form>
+                </td>
+
             </tr>
             </tbody>
         </table>

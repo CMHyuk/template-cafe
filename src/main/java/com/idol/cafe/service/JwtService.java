@@ -1,7 +1,7 @@
 package com.idol.cafe.service;
 
 import com.idol.cafe.config.JwtConfig;
-import com.idol.cafe.exception.jwt.TokenNotFoundException;
+import com.idol.cafe.exception.jwt.TokenNotFoundBircaException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -55,7 +55,7 @@ public class JwtService {
 
     private void validateToken(String token) {
         if (token == null || token.equals("")) {
-            throw new TokenNotFoundException();
+            throw new TokenNotFoundBircaException();
         }
     }
 

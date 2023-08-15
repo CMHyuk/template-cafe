@@ -26,7 +26,6 @@ import static java.util.stream.Collectors.toList;
 public class CafeService {
 
     private final UserRepository userRepository;
-    private final CafeRepositoryImpl cafeRepositoryImpl;
     private final CafeRepository cafeRepository;
 
     public Long saveCafe(LoginUser loginUser, SaveCafeRequest request) {
@@ -44,10 +43,14 @@ public class CafeService {
         return cafeRepository.save(cafe).getId();
     }
 
-    public List<CafeSearchResponse> searchCafe(CafeSearchRequest request) {
-        //1. 아이돌만 검색 2. 아이돌 + 날짜 3. 아이돌 + 장소 4. 아이돌 + 날짜 + 장소
-        List<Cafe> cafes = cafeRepositoryImpl.getCafeResults(request);
-        return cafes.stream().map(c -> new CafeSearchResponse(c.getCafeName(), c.getAddress()))
+    public List<CafeSearchResponse> searchCafe(int page, CafeSearchRequest request) {
+        //1. 아이돌 2. 아이돌 + 날짜 3. 아이돌 + 장소 4. 아이돌 + 날짜 + 장소 검색
+        List<Cafe> cafes = cafeRepository.getCafeResults(page, request);
+        return cafes.stream().map(c -> CafeSearchResponse.builder()
+                        .cafeName(c.getCafeName())
+                        .address(c.getAddress())
+                        .imageUrl(c.getImageUrl())
+                        .build())
                 .collect(toList());
     }
 

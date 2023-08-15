@@ -25,8 +25,8 @@ public class CafeController {
     }
 
     @GetMapping("/cafes")
-    public List<CafeSearchResponse> searchCafe(@RequestBody @Valid CafeSearchRequest request) {
-        return cafeService.searchCafe(request);
+    public List<CafeSearchResponse> searchCafe(@RequestParam int page, @RequestBody @Valid CafeSearchRequest request) {
+        return cafeService.searchCafe(page, request);
     }
 
     @GetMapping("/cafe/{cafeId}/details")

@@ -1,8 +1,8 @@
 package com.idol.cafe.exception.jwt;
 
-import com.idol.cafe.exception.Exception;
+import com.idol.cafe.exception.BircaException;
 
-public class Unauthorized extends Exception {
+public class Unauthorized extends BircaException {
 
     private static final String MESSAGE = "인증이 필요합니다.";
 

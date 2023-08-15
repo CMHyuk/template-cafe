@@ -6,5 +6,5 @@ import com.idol.cafe.dto.request.CafeSearchRequest;
 import java.util.List;
 
 public interface CafeRepositoryCustom {
-    List<Cafe> getCafeResults(CafeSearchRequest request);
+    List<Cafe> getCafeResults(int page, CafeSearchRequest request);
 }

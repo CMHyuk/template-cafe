@@ -1,8 +1,8 @@
 package com.idol.cafe.exception;
 
-public abstract class Exception extends RuntimeException {
+public abstract class BircaException extends RuntimeException {
 
-    public Exception(String message) {
+    public BircaException(String message) {
         super(message);
     }
 

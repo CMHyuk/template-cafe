@@ -1,6 +1,6 @@
 package com.idol.cafe.exception;
 
-public class CafeNotFound extends Exception {
+public class CafeNotFound extends BircaException {
 
     private static final String MESSAGE = "존재하지 않는 카페 입니다.";
 

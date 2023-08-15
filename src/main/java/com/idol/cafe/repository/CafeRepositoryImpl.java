@@ -17,39 +17,39 @@ public class CafeRepositoryImpl implements CafeRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Cafe> getCafeResults(CafeSearchRequest request) {
+    public List<Cafe> getCafeResults(int page, CafeSearchRequest request) {
         QCafe cafe = QCafe.cafe;
-        QUser user = QUser.user;
         QReservation reservation = QReservation.reservation;
 
         BooleanBuilder predicate = new BooleanBuilder();
 
+        //아이돌 검색
         if (request.getIdolName() != null) {
-            predicate.and(cafe.cafeName.eq(request.getIdolName()));
+            predicate.and(reservation.idol.eq(request.getIdolName()));
         }
 
+        //날짜 검색
         if (request.getStartDate() != null && request.getEndDate() != null) {
             predicate.and(reservation.startDate.between(request.getStartDate(), request.getEndDate())
                     .or(reservation.endDate.between(request.getStartDate(), request.getEndDate())));
         }
 
-        if (request.getPlace() != null) {
-            predicate.and(cafe.address.area.eq(request.getPlace()));
+        //장소 검색
+        if (request.getAddress() != null) {
+            predicate.and(cafe.address.city.eq(request.getAddress().getCity()))
+                    .and(cafe.address.district.eq(request.getAddress().getDistrict()))
+                    .and(cafe.address.area.eq(request.getAddress().getArea()));
         }
 
-        if (request.getIdolName() != null && request.getStartDate() != null && request.getEndDate() != null && request.getPlace() != null) {
-            predicate.and(cafe.cafeName.eq(request.getIdolName())
-                    .and(reservation.startDate.between(request.getStartDate(), request.getEndDate())
-                            .or(reservation.endDate.between(request.getStartDate(), request.getEndDate())))
-                    .and(cafe.address.area.eq(request.getPlace())));
-        }
+        int pageSize = 10;
+        int offset = page * pageSize;
 
         return queryFactory
                 .selectFrom(cafe)
-                .leftJoin(cafe.user, user)
                 .leftJoin(cafe.reservations, reservation)
                 .where(predicate)
-                .limit(10)
+                .offset(offset)
+                .limit(pageSize)
                 .fetch();
     }
 

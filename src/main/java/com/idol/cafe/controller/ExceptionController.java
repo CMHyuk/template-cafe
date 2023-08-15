@@ -2,7 +2,7 @@ package com.idol.cafe.controller;
 
 import com.idol.cafe.dto.response.error.BindErrorResponse;
 import com.idol.cafe.dto.response.error.ErrorResponse;
-import com.idol.cafe.exception.Exception;
+import com.idol.cafe.exception.BircaException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -18,8 +18,8 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RestControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> exception(Exception e) {
+    @ExceptionHandler(BircaException.class)
+    public ResponseEntity<ErrorResponse> exception(BircaException e) {
         int statusCode = e.getStatusCode();
 
         ErrorResponse body = ErrorResponse.builder()

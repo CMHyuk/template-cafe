@@ -1,12 +1,12 @@
 package com.idol.cafe.exception.jwt;
 
-import com.idol.cafe.exception.Exception;
+import com.idol.cafe.exception.BircaException;
 
-public class TokenNotFoundException extends Exception {
+public class TokenNotFoundBircaException extends BircaException {
 
     private static final String MESSAGE = "Token이 없습니다.";
 
-    public TokenNotFoundException() {
+    public TokenNotFoundBircaException() {
         super(MESSAGE);
     }
 
