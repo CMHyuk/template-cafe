@@ -1,6 +1,5 @@
 package com.idol.cafe.service;
 
-import com.idol.cafe.domain.RoleType;
 import com.idol.cafe.domain.entity.User;
 import com.idol.cafe.dto.request.LoginUser;
 import com.idol.cafe.dto.response.kakao.GetMemberInfoResponse;

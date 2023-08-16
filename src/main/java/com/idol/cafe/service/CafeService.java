@@ -10,7 +10,6 @@ import com.idol.cafe.dto.response.CafeSearchResponse;
 import com.idol.cafe.exception.CafeNotFound;
 import com.idol.cafe.exception.UserNotFound;
 import com.idol.cafe.repository.CafeRepository;
-import com.idol.cafe.repository.CafeRepositoryImpl;
 import com.idol.cafe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
