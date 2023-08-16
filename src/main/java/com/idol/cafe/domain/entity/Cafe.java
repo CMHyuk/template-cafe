@@ -47,4 +47,11 @@ public class Cafe extends BaseEntity {
         this.user = user;
     }
 
+    public void updateCafe(String cafeName, String introduction, String imageUrl, User user) {
+        this.cafeName = cafeName;
+        this.introduction = introduction;
+        this.imageUrl = imageUrl;
+        this.user = user;
+    }
+
 }

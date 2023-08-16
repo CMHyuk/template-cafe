@@ -5,6 +5,7 @@ import com.idol.cafe.domain.entity.User;
 import com.idol.cafe.dto.request.CafeSearchRequest;
 import com.idol.cafe.dto.request.LoginUser;
 import com.idol.cafe.dto.request.SaveCafeRequest;
+import com.idol.cafe.dto.request.UpdateCafeRequest;
 import com.idol.cafe.dto.response.CafeResponse;
 import com.idol.cafe.dto.response.CafeSearchResponse;
 import com.idol.cafe.exception.CafeNotFound;
@@ -40,6 +41,17 @@ public class CafeService {
                 .build();
 
         return cafeRepository.save(cafe).getId();
+    }
+
+    @Transactional
+    public void updateCafe(Long cafeId, UpdateCafeRequest request) {
+        Cafe cafe = cafeRepository.findById(cafeId)
+                .orElseThrow(CafeNotFound::new);
+
+        User user = cafe.getUser();
+
+        cafe.updateCafe(request.getCafeName(), request.getIntroduction(),
+                request.getFile().getOriginalFilename(), user);
     }
 
     public List<CafeSearchResponse> searchCafe(int page, CafeSearchRequest request) {

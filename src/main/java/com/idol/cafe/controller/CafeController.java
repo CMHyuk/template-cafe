@@ -4,6 +4,7 @@ import com.idol.cafe.config.Login;
 import com.idol.cafe.dto.request.CafeSearchRequest;
 import com.idol.cafe.dto.request.LoginUser;
 import com.idol.cafe.dto.request.SaveCafeRequest;
+import com.idol.cafe.dto.request.UpdateCafeRequest;
 import com.idol.cafe.dto.response.CafeResponse;
 import com.idol.cafe.dto.response.CafeSearchResponse;
 import com.idol.cafe.service.CafeService;
@@ -22,6 +23,11 @@ public class CafeController {
     @PostMapping("/cafe/register")
     public Long saveCafe(@Login LoginUser loginUser, @RequestBody SaveCafeRequest request) {
         return cafeService.saveCafe(loginUser, request);
+    }
+
+    @PatchMapping("/cafe/{cafeId}/update")
+    public void updateCafe(@PathVariable Long cafeId, @ModelAttribute UpdateCafeRequest request) {
+        cafeService.updateCafe(cafeId, request);
     }
 
     @GetMapping("/cafes")
