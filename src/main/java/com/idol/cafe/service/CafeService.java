@@ -35,7 +35,7 @@ public class CafeService {
         Cafe cafe = Cafe.builder()
                 .cafeName(request.getCafeName())
                 .introduction(request.getIntroduction())
-                .imageUrl(request.getImageUrl())
+                .imageUrl(request.getFile().getOriginalFilename())
                 .address(request.getAddress())
                 .user(user)
                 .build();

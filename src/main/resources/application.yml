@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/cafe
+    url: jdbc:h2:mem:test
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -25,20 +25,20 @@ logging.level:
 cloud:
   aws:
     credentials:
-      access-key: AKIAZGK57MHEDGMWNSOD
-      secret-key: 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
+      access-key: *************
+      secret-key: *************
     region:
       static: ap-northeast-2
     s3:
-      bucket: cmhyuk-upload
+      bucket: birca-bucket
     stack:
       auto: false
 
 jwt:
-  jwt-key: "LMRLvJVDp/lUVRG6EcJTo7g6moHepHps9lRFw9KIiA4="
+  jwt-key: "***************"
 
 invoke-url:
-  url: "https://ng9uv3ttrl.apigw.ntruss.com/custom/v1/24289/3e818bfd9c5ba0c0cbb341e28a7636c91bd0b012a236a510c6e149e62fa95621/document/biz-license"
+  url: "https://**************/document/biz-license"
 
 service-key:
-  key: "api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=avuD%2BjmTxg%2Fpn4CWUsCpjHe5C5qITGrrqYX89SC1wdBKDa%2B8%2FbMVe3n5EM8kgzPCVH0fFiXmEsaHLGAbymLRBw%3D%3D"
+  key: "***************"

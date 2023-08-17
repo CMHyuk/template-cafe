@@ -25,14 +25,20 @@ logging.level:
 cloud:
   aws:
     credentials:
-      access-key: AKIAZGK57MHEDGMWNSOD
-      secret-key: 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
+      access-key: *************
+      secret-key: *************
     region:
       static: ap-northeast-2
     s3:
-      bucket: cmhyuk-upload
+      bucket: birca-bucket
     stack:
       auto: false
 
 jwt:
-  jwt-key: "LMRLvJVDp/lUVRG6EcJTo7g6moHepHps9lRFw9KIiA4="
+  jwt-key: "***************"
+
+invoke-url:
+  url: "https://**************/document/biz-license"
+
+service-key:
+  key: "***************"

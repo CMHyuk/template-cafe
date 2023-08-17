@@ -21,7 +21,7 @@ public class CafeController {
     private final CafeService cafeService;
 
     @PostMapping("/cafe/register")
-    public Long saveCafe(@Login LoginUser loginUser, @RequestBody SaveCafeRequest request) {
+    public Long saveCafe(@Login LoginUser loginUser, @ModelAttribute SaveCafeRequest request) {
         return cafeService.saveCafe(loginUser, request);
     }
 
